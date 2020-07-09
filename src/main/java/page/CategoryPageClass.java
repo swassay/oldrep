@@ -59,27 +59,47 @@ public class CategoryPageClass extends BasePage {
 	
 	
 	  public void Togglebar() throws InterruptedException { 
+		  System.out.println("In Togglebar");
 		  findBOX.click(); 
-		  	TimeElement(driver, 5, findBOX);
-				Assert.assertTrue(findBOX.isSelected(), "findbox is not selected!");
-				System.out.println("Test pass");
+		  System.out.println("Test passed");
+			Thread.sleep(2000);
+		//	TimeElement(driver, 5, findBOX);
+			Assert.assertTrue(findBOX.isSelected(), "ToggleAllCheckbox is not selected!" );
+			System.out.println("Toggle test passed");
+		}
+			/*
+			 * public void verifyAllfindboxesareSelected() { List<WebElement> findboxes =
+			 * driver.findElements(By.xpath("//input[@type='checkbox']")); for (int i = 0; i
+			 * <findboxes.size(); i++) { //findboxes.get(i).click();
+			 * 
+			 * if (findboxes.get(i).isSelected()) { System.out.println(i +
+			 * " findBox is selected "); } else { System.out.println(i +
+			 * " findBox is not selected "); }}
+			 * 
+			 * 
+			 * }
+			 */	  
+	  
+	  public void verifyAllCheckboxesareSelected() {
+		  System.out.println("In verifyAllCheckboxes");
+		//////*[@id="todos-content"]/form/ul/li/input
+			List<WebElement> checkboxes = driver.findElements(By.xpath("//input[@type='checkbox']"));
+			//List<WebElement> checkboxes = driver.findElements(By.name("allbox"));
+			  System.out.println("Checking size");
+			  System.out.println("Checkbox size:" +checkboxes.size());
+			for (int i = 0; i <checkboxes.size(); i++) {
+				
+
+				if (checkboxes.get(i).isSelected()) {
+					System.out.println(i + " checkBox is selected ");
+				} 
+				else {
+					System.out.println(i + " checkBox is not selected ");
+				}
 			}
+	}
 
-			public void verifyAllfindboxesareSelected() {
-				List<WebElement> findboxes = driver.findElements(By.xpath("//input[@type='findbox']"));
-				for (int i = 0; i <findboxes.size(); i++) {
-					//findboxes.get(i).click();
 
-					if (findboxes.get(i).isSelected()) {
-						System.out.println(i + " findBox is selected ");
-					} 
-					else {
-						System.out.println(i + " findBox is not selected ");
-					}}  
-	  
-	  
-	  }
-	  
 	  public void RemoveOne() { 
 		  SUBMIT_SINGLE_findBOX.click();
 	//	  verifyListRemoved();
@@ -107,23 +127,24 @@ public class CategoryPageClass extends BasePage {
 	// methods
 	  	public void AddCategory() throws InterruptedException {
 
-	
+	  		 System.out.println("Entered add category"); 
 	  // added new dropdown item, created dropdown object using Select class
-	  		CategoryDataInputBox_LOCATOR.sendKeys(newValue);
-	  AddCategory_LOCATOR.click();
+	  	CategoryDataInputBox_LOCATOR.sendKeys(newValue);
+	    AddCategory_LOCATOR.click();
 	  
-	   
+		 System.out.println("Clicked");
 	  Select drpCategory = new Select(CategoryDropDown_LOCATOR); 
 	  Thread.sleep(10);
 	  
 	  List<WebElement> dropdownItems = drpCategory.getOptions(); 
-	  
+		 System.out.println("No of items: " +dropdownItems.size());
 	  // finding which item in list
 	  for (WebElement dropdowncategory : dropdownItems)
 	  {
 	  
 	  if (dropdowncategory.getText().equals(newValue)) { Assert.assertTrue(true);
-	  yes_no = true; System.out.println("New added category is " +
+	  yes_no = true; 
+	  System.out.println("New added category is " +
 	  dropdowncategory.getText()); }
 	  
 	  }
@@ -192,6 +213,7 @@ Select dropDown = new Select(MONTHDROPDOWN);
 			System.out.println("actual"+(option-1));
 			System.out.println("i="+i);
 			Assert.assertEquals(i, option-1, "Failed Month Test");
+			System.out.println("Printing months - Exiting");
 	}		
 		
 	private void TimeElement(WebDriver driver, int time, WebElement LOCATOR) {

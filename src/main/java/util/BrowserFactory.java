@@ -15,13 +15,10 @@ public class BrowserFactory {
        driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 		driver.manage().window().maximize();
-		driver.get("http://techfios.com/test/103/");
+		driver.get("http://techfios.com/test/101/");
 		return driver;
 	}
 
-	public static void tearDown() {
-		driver.quit();
-		driver.close();
+	
+		
 	}
-
-}
